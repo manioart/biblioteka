@@ -3,11 +3,19 @@
         Lista książek
     @endsection
     @section('content')
-        <div class="container">
+    <div class="container">
+        <table class="table">
         @forelse ($booksList as $book)
-            Tu będą dane książki!
+            <tr>
+                <td> {{$book->name}} </td>
+                <td> {{$book->year}} </td>
+                <td> {{$book->publication_place}} </td>
+                <td> {{$book->pages}} </td>
+                <td> {{$book->price}} </td>
+            </tr>
             @empty
                 Brak rekordów!
         @endforelse
-        </div>
+</table>
+    </div>
     @endsection('content')
