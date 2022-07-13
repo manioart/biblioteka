@@ -1,24 +1,32 @@
 @extends('template')
     @section('title')
-        Lista książek
+    Lista książek
     @endsection
     @section('content')
     <div class="container">
+        @isset ($book)
         <table class="table">
-        @forelse ($booksList as $book)
             <tr>
+                <td>Nazwa Książki</td>
                 <td> {{$book->name}} </td>
-                <td> {{$book->year}} </td>
-                <td> {{$book->publication_place}} </td>
-                <td> {{$book->pages}} </td>
-                <td> {{$book->price}} </td>
-                <td> <a href="{{ url('/books', [$book->id]) }}">Podgląd</a> </td>
-                <td> <a href="{{ url('/books/edit', [$book->id]) }}">Edycja</a> </td>
-                <td> <a href="{{ url('/books', [$book->id, 'delete']) }}">Usuń</a> </td>
             </tr>
-            @empty
-                Brak rekordów!
-        @endforelse
-</table>
+            <tr>
+                <td>Rok wydania</td>
+                <td> {{$book->year}} </td>
+            </tr>
+            <tr>
+                <td>Miejsce wydania</td>
+                <td> {{$book->publication_place}} </td>
+            </tr>
+            <tr>
+                <td>Liczba stron</td>
+                <td> {{$book->pages}} </td>
+            </tr>
+            <tr>
+                <td>Cena</td>
+                <td> {{$book->price}} </td>
+            </tr>
+        </table>
+        @endisset
     </div>
     @endsection('content')
