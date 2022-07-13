@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::resource('books', 'App\Http\Controllers\BookController');
 Route::get('/books/{id}/delete', 'App\Http\Controllers\BookController@destroy');
+Route::resource('loans', 'App\Http\Controllers\LoanController');
+Route::resource('authors', 'App\Http\Controllers\AuthorController');

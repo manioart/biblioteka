@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 use App\Models\Book;
-use App\Models\Isbn;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Book $book)
+    public function index()
     {
-        $booksList = $book->all();
-        return view('books/list',['booksList' => $booksList]);
+        $authorsList = Author::all();
+        return view('authors/list',['authorsList' => $authorsList]);
     }
 
     /**
@@ -25,13 +25,21 @@ class BookController extends Controller
      */
     public function create()
     {
-        $book = new Book();
-        $book->name = "Czarny Dom";
-        $book->year = 2010;
-        $book->publication_place = "Warszawa";
-        $book->pages = 648;
-        $book->price = 59.99;
-        $book->save();
+        $author = new Author();
+        $author->lastname = "Straub";
+        $author->firstname = "Peter";
+        $author->birthday = "1943-03-02";
+        $author->genres = "horrory, thrillery";
+        $author->save();
+        $authorSecond = new Author();
+        $authorSecond->lastname = "King";
+        $authorSecond->firstname = "Stephen";
+        $authorSecond->birthday = "1947-09-21";
+        $authorSecond->genres = "horrory, thrillery";
+        $authorSecond->save();
+        $czarnyDom = Book::where('name',"Czarny Dom")->first();
+        $czarnyDom->authors()->attach($author);
+        $czarnyDom->authors()->attach($authorSecond);
         return redirect('books');
     }
 
@@ -54,8 +62,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::find($id);
-        return view('books/show',['book' => $book]);
+        //
     }
 
     /**
@@ -89,8 +96,6 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::find($id);
-        $book->delete();
-        return redirect('books');
+        //
     }
 }
